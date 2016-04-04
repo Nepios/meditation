@@ -20,6 +20,18 @@ router.get('/:id', function(req, res) {
   Meditation.findById(req.params.id, function(err, meditation) {
     if (err) return res.status(500).send(err);
     res.send(meditation);
+  })
+  .put(function(req, res) {
+    Recipe.findByIdAndUpdate(req.params.id, req.body, function(err) {
+      if (err) return res.status(500).send(err);
+      res.send({'message': 'success'});
+    });
+  })
+  .delete(function(req, res) {
+    Recipe.findByIdAndRemove(req.params.id, function(err) {
+      if (err) return res.status(500).send(err);
+      res.send({'message': 'success'});
+    });
   });
 });
 

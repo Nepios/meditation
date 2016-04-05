@@ -8,6 +8,25 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     console.log(data);
   });
 }])
+
+.controller('NewCtrl', ['$scope', '$location', 'Meditation', function($scope, $location, Meditation) {
+
+    $scope.meditation = {
+      title: '',
+      description: '',
+      mp3: '',
+      author: ''
+    };
+
+    $scope.createMeditation = function() {
+      Meditation.save($scope.meditation, function success(data) {
+        $location.path('/');
+      }, function error(data) {
+        console.log(data);
+      });
+    }
+}])
+
 .controller('ShowCtrl', ['$scope', '$stateParams', 'Meditation', function($scope, $stateParams, Meditation) {
   $scope.recipe = {};
 

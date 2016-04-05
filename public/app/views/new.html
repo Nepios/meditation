@@ -1,0 +1,22 @@
+<h1>New Meditation</h1>
+
+<form ng-submit="createMeditation()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" ng-model="meditation.title">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" ng-model="meditation.description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="sound">mp3</label>
+    <input class="form-control" id="path" placeholder="" ng-model="meditation.audiofile">
+  </div>
+    <div class="form-group">
+    <label for="sound">author</label>
+    <input class="form-control" id="author" placeholder="" ng-model="meditation.author">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

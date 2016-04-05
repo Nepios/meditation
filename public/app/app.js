@@ -14,6 +14,12 @@ app.config([
     templateUrl: 'app/views/meditation.html',
     controller: 'HomeCtrl'
   })
+
+  .state('new', {
+    url: '/new',
+    templateUrl: 'app/views/new.html',
+    controller: 'NewCtrl'
+  })
    
   .state('signup', {
     url: '/signup',

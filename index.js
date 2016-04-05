@@ -9,8 +9,10 @@ var secret = "mysupersecretpassword";
 
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var skipper = require('skipper');
 mongoose.connect('mongodb://localhost/meditations');
 
+app.use(skipper());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));

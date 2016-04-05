@@ -7,6 +7,14 @@ angular.module('MeditationCtrls', ['MeditationServices'])
   }, function error(data) {
     console.log(data);
   });
+
+  $scope.deleteMeditation = function(id, meditationIdx) {
+    Recipe.delete({id: id}, function success(data) {
+      $scope.meditations.splice(meditationIdx, 1);
+    }, function error(data) {
+      console.log(data);
+    });
+  }
 }])
 
 .controller('NewCtrl', ['$scope', '$location', 'Meditation', function($scope, $location, Meditation) {
@@ -14,8 +22,10 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     $scope.meditation = {
       title: '',
       description: '',
-      mp3: '',
-      author: ''
+      link: '',
+      author: '',
+      emotion: 0,
+      duration: 0
     };
 
     $scope.createMeditation = function() {

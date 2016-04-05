@@ -1,12 +1,9 @@
 var express = require('express');
 var Meditation = require('../models/meditation');
 var router = express.Router();
-var skipperS3 = require('skipper-s3');
 var s3 = require('s3');
 var s3key = process.env.AWS_ACCESS_KEY_ID;
 var s3secret = process.env.AWS_SECRET_ACCESS_KEY;
-var AWS = require('aws-sdk'); 
-var AWSs3 = new AWS.S3(); 
 
 router.route('/')
   .get(function(req, res) {
@@ -18,6 +15,7 @@ router.route('/')
     });
   })
   .post(function(req, res) {
+    // sets up the s3 wrapper to upload to AWS
     var s3 = require('s3');
     var client = s3.createClient({
       maxAsyncS3: 20,     // this is the default 
@@ -30,16 +28,17 @@ router.route('/')
         secretAccessKey: s3secret,
       },
     });
-    console.log(`meditationappstorage/meditations/${req.body.title}`);
+    var awspath = "meditationappstorage/meditations/" + req.body.title;
+ 
     var params = {
       localFile: req.body.audiofile,
-
       s3Params: {
         Bucket: "meditationappstorage",
-        Key: `meditationappstorage/meditations/${req.body.title}`,
+        Key: awspath,
         ACL: 'public-read'
       },
     };
+    // uploads mp3 file to AWS
     var uploader = client.uploadFile(params);
     uploader.on('error', function(err) {
       console.error("unable to upload:", err.stack);
@@ -50,41 +49,39 @@ router.route('/')
     });
     uploader.on('end', function() {
       console.log("done uploading");
-      // Meditation.create(req.body, function(err, meditations) {
-      //   if (err) return res.status(500).send(err);
-      //   console.log(results)
-      //   res.send(meditation);
-    });
-  });
+      var awslink = "https://s3-us-west-2.amazonaws.com/meditationappstorage/meditations/" + req.body.title;
+      // creates new Meditation document in database
+      Meditation.create(req.body, function(err, meditation) {
+        if (err) return res.status(500).send(err);
+        res.send(meditation);
+      });
+      // updates database with AWS link
+      Meditation.findOneAndUpdate({title: req.body.title},{$set: {link: awslink}}, { new: true }, function(err, meditations) {
+        if (err) return res.status(500).send(err);
+        console.log(meditations);
+      });
+    })
+  })
 
-//         var mp3 = results.files[0].extra.Location;
-//         Meditation.create(req.body, function(err, meditations) {
-//           if (err) return res.status(500).send(err);
-//           console.log(results)
-//           res.send(meditation);
-//         });
-//       };
-//     });
-// }
-//   });
-
-router.get('/:id', function(req, res) {
-  Meditation.findById(req.params.id, function(err, meditation) {
+  router.route('/:id')
+    .get(function(req, res) {
+      Meditation.findById(req.params.id, function(err, meditation) {
     if (err) return res.status(500).send(err);
     res.send(meditation);
-  })
+    })
+   })
   .put(function(req, res) {
-    Recipe.findByIdAndUpdate(req.params.id, req.body, function(err) {
+    Meditation.findByIdAndUpdate(req.params.id, req.body, function(err) {
       if (err) return res.status(500).send(err);
       res.send({'message': 'success'});
     });
   })
   .delete(function(req, res) {
-    Recipe.findByIdAndRemove(req.params.id, function(err) {
+    console.log(req.params.id);
+    Meditation.findByIdAndRemove(req.params.id, {}, function(err) {
       if (err) return res.status(500).send(err);
       res.send({'message': 'success'});
     });
   });
-});
 
 module.exports = router;

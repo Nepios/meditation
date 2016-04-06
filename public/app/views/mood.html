@@ -1,8 +1,10 @@
-<h1>mood meditations</h1>
+<h1>meditations</h1>
 <div className="well" ng-repeat="meditation in meditations track by meditation._id">
-  <h2>{{meditation.title}}</h2>
-  <h3><small> {{meditation.author}}</small></h3>
+  <h3>{{meditation.title}}<small> {{meditation.author}}</small></h3>
+  <p>{{meditation.description}}</p>
+  <p>{{meditation.duration}}</p>
   <div>
+    
     <audio controls preload="none" src="{{meditation.link}}" />
   </div>
 </div>

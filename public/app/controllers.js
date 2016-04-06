@@ -41,11 +41,8 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('ShowCtrl', ['$scope', '$stateParams', 'Meditation', function($scope, $stateParams, Meditation) {
   $scope.meditation = {};
-  console.log($stateParams.id);
-  Meditation.get({mood: $stateParams.id},function success(data) {
+  MeditationSearch.get({mood: $stateParams.id},function success(data) {
     $scope.meditations = data;
-    console.log(data);
-    console.log(data[0].title);
   }, function error(data) {
     console.log(data);
   });

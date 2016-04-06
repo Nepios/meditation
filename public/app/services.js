@@ -1,11 +1,16 @@
 angular.module('MeditationServices', ['ngResource'])
-.factory('Meditation', ['$resource', function($resource) {
+.factory('MeditationSearch', ['$resource', function($resource) {
   return $resource('/api/meditations/mood/:mood', {}, {
     'get': {
       method: 'GET',
       isArray: true
     }
   });
+}])
+
+.factory('Meditation', ['$resource', function($resource) {
+  return $resource('/api/meditations/:id', {}, {});
+
 }])
 
 .factory('Auth', ['$window', function($window){

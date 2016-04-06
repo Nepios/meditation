@@ -1,9 +1,9 @@
 <h1> Meditation html page is working </h1>
 
-<div className="well">
-  <h2>Track Name</h2>
-  <h3><small> Artist</small></h3>
+<div className="well" ng-repeat="meditation in meditations track by meditation._id">
+  <h2>{{meditation.title}}</h2>
+  <h3><small> {{meditation.author}}</small></h3>
   <div>
-    <audio controls src="https://s3-us-west-2.amazonaws.com/meditationappstorage/meditationappstorage/meditations/Grasping" />
+    <audio controls preload="none" src="{{meditation.link}}" />
   </div>
 </div>

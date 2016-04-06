@@ -9,7 +9,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
   });
 
   $scope.deleteMeditation = function(id, meditationIdx) {
-    Recipe.delete({id: id}, function success(data) {
+    Meditation.delete({id: id}, function success(data) {
       $scope.meditations.splice(meditationIdx, 1);
     }, function error(data) {
       console.log(data);
@@ -38,7 +38,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 }])
 
 .controller('ShowCtrl', ['$scope', '$stateParams', 'Meditation', function($scope, $stateParams, Meditation) {
-  $scope.recipe = {};
+  $scope.meditation = {};
 
   Meditation.get({id: $stateParams.id}, function success(data) {
     $scope.meditation = data;
@@ -78,9 +78,20 @@ angular.module('MeditationCtrls', ['MeditationServices'])
       Alerts.add('success', 'You are logged in');
       $location.path('/');
     }, function error(res){
-      console.log(res);
+      console.log("login controller res" +res);
     })
   }
+}])
+
+.controller('DisplayCtrl', ['$scope', 'Meditation', function($scope, Meditation) {
+  $scope.meditations = [];
+  console.log("diaplayCtrl");
+
+  Meditation.query(function success(data) {
+    $scope.meditations = data;
+  }, function error(data) {
+    console.log(data);
+  });
 }])
 
 .controller('AlertsCtrl', ['$scope', 'Alerts', function ($scope, Alerts){

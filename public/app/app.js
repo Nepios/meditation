@@ -4,15 +4,26 @@ app.config([
   '$stateProvider',
   '$urlRouterProvider',
   '$locationProvider',
-  function($stateProvider, $urlRouterProvider, $locationProvider) {
+  '$sceDelegateProvider',
+  function($stateProvider, $urlRouterProvider, $locationProvider,$sceDelegateProvider) {
+  
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'https://s3-us-west-2.amazonaws.com/meditationappstorage/meditationappstorage/meditations/**'
+  ]);
 
   $urlRouterProvider.otherwise('/404');
 
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl: 'app/views/meditation.html',
+    templateUrl: 'app/views/home.html',
     controller: 'HomeCtrl'
+  })
+  .state('meditations', {
+    url: '/meditations',
+    templateUrl: 'app/views/meditation.html',
+    controller: 'DisplayCtrl'
   })
 
   .state('new', {

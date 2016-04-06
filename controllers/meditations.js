@@ -8,7 +8,6 @@ var s3secret = process.env.AWS_SECRET_ACCESS_KEY;
 router.route('/')
   .get(function(req, res) {
     Meditation.find(function(err, meditations) {
-      console.log(err);
       if (err) return res.status(500).send(err);
 
       res.send(meditations);
@@ -49,7 +48,7 @@ router.route('/')
     });
     uploader.on('end', function() {
       console.log("done uploading");
-      var awslink = "https://s3-us-west-2.amazonaws.com/meditationappstorage/meditations/" + req.body.title;
+      var awslink = "https://s3-us-west-2.amazonaws.com/meditationappstorage/meditationappstorage/meditations/" + req.body.title;
       // creates new Meditation document in database
       Meditation.create(req.body, function(err, meditation) {
         if (err) return res.status(500).send(err);

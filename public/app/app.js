@@ -25,8 +25,12 @@ app.config([
     templateUrl: 'app/views/meditation.html',
     controller: 'DisplayCtrl'
   })
-
-  .state('new', {
+  .state('moodmeditations', {
+    url: '/meditations/mood/:id',
+    templateUrl: 'app/views/mood.html',
+    controller: 'ShowCtrl'
+  })
+    .state('new', {
     url: '/new',
     templateUrl: 'app/views/new.html',
     controller: 'NewCtrl'

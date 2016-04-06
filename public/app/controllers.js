@@ -2,11 +2,12 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 .controller('HomeCtrl', ['$scope', 'Meditation', function($scope, Meditation) {
   $scope.meditations = [];
 
-   Meditation.query(function success(data) {
-    $scope.meditations = data;
-  }, function error(data) {
-    console.log(data);
-  });
+   // Meditation.get(function success(data) {
+   //  console.log(data);
+   //  $scope.meditations = data;
+   //  }, function error(data) {
+   //    console.log(data);
+   //  });
 
   $scope.deleteMeditation = function(id, meditationIdx) {
     Meditation.delete({id: id}, function success(data) {
@@ -15,6 +16,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
       console.log(data);
     });
   }
+
 }])
 
 .controller('NewCtrl', ['$scope', '$location', 'Meditation', function($scope, $location, Meditation) {
@@ -39,9 +41,11 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('ShowCtrl', ['$scope', '$stateParams', 'Meditation', function($scope, $stateParams, Meditation) {
   $scope.meditation = {};
-
-  Meditation.get({id: $stateParams.id}, function success(data) {
-    $scope.meditation = data;
+  console.log($stateParams.id);
+  Meditation.get({mood: $stateParams.id},function success(data) {
+    $scope.meditations = data;
+    console.log(data);
+    console.log(data[0].title);
   }, function error(data) {
     console.log(data);
   });
@@ -85,7 +89,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('DisplayCtrl', ['$scope', 'Meditation', function($scope, Meditation) {
   $scope.meditations = [];
-  console.log("diaplayCtrl");
+ 
 
   Meditation.query(function success(data) {
     $scope.meditations = data;

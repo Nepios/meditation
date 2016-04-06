@@ -4,6 +4,7 @@ var router = express.Router();
 var s3 = require('s3');
 var s3key = process.env.AWS_ACCESS_KEY_ID;
 var s3secret = process.env.AWS_SECRET_ACCESS_KEY;
+var mongoose = require('mongoose');
 
 router.route('/')
   .get(function(req, res) {
@@ -61,6 +62,14 @@ router.route('/')
       });
     })
   })
+   router.route('/mood/:mood')
+    .get(function(req, res) {
+      console.log("mood router is running");
+      Meditation.find({emotion: req.params.mood}, function(err, meditation) {
+    if (err) return res.status(500).send(err);
+    res.send(meditation);
+    })
+   })
 
   router.route('/:id')
     .get(function(req, res) {
@@ -82,5 +91,5 @@ router.route('/')
       res.send({'message': 'success'});
     });
   });
-
+ 
 module.exports = router;

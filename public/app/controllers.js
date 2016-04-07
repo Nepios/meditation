@@ -39,7 +39,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     }
 }])
 
-.controller('ShowCtrl', ['$scope', '$stateParams', 'Meditation', function($scope, $stateParams, Meditation) {
+.controller('ShowCtrl', ['$scope', '$stateParams', 'MeditationSearch', function($scope, $stateParams, MeditationSearch) {
   $scope.meditation = {};
   MeditationSearch.get({mood: $stateParams.id},function success(data) {
     $scope.meditations = data;
@@ -93,6 +93,41 @@ angular.module('MeditationCtrls', ['MeditationServices'])
   }, function error(data) {
     console.log(data);
   });
+}])
+
+.controller('TimerCtrl', ['$scope', '$interval', '$filter', function($scope, $interval, $filter) {
+    // $scope.time = $filter('date')(new Date(), 'HH:mm:ss');
+    // $scope.newTime = $scope.time + $filter('date')('00:01:00');
+    $scope.Timer = 300;
+    $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
+    $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);
+    $scope.calculateTime = function () {
+      $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
+      $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);
+      $output = $scope.minutes + ":" + $scope.seconds;
+    }
+    $scope.startTimer = function() {
+      $scope.counter = true;
+       $scope.intervalId = $interval(function() {
+        if ($scope.Timer > 0 ){
+          $scope.Timer--
+          $scope.calculateTime($scope.Timer);
+        }
+        }, 1000)
+       }
+      $scope.stopTimer = function () {
+      $interval.cancel($scope.intervalId);
+    }
+    $scope.resetTimer = function () {
+      $scope.Timer = 300;
+      $scope.calculateTime($scope.Timer);
+    }
+    $scope.addTimer = function () {
+      if ($scope.Timer < 3600){
+        $scope.Timer += 300;
+        $scope.calculateTime($scope.Timer);
+      }
+    }
 }])
 
 .controller('AlertsCtrl', ['$scope', 'Alerts', function ($scope, Alerts){

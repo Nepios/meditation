@@ -46,6 +46,11 @@ app.config([
     templateUrl: 'app/views/userLogin.html',
     controller: 'LoginCtrl'
   })
+  .state('timer', {
+    url: '/timer',
+    templateUrl: 'app/views/timer.html',
+    controller: 'TimerCtrl'
+  })
   .state('404', {
     url: '/404',
     templateUrl: 'app/views/404.html'

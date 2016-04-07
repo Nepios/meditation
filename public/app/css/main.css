@@ -1,0 +1,11 @@
+.zen-stone {
+  float: left;
+}
+
+.emotions {
+  float: right;
+}
+
+.btn-emotion {
+  display: inline-block;
+}

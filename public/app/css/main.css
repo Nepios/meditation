@@ -1,11 +1,24 @@
-.zen-stone {
-  float: left;
-}
-
-.emotions {
-  float: right;
+.home {
+  background-image: url("./images/zen_ocean_by_abdullahusman.jpg");
+  height: 500px;
 }
 
 .btn-emotion {
   display: inline-block;
+}
+
+.timer {
+  background-image: url('https://pomodorozen.files.wordpress.com/2009/07/zen-garden.jpg');
+  background-size: cover;
+  height: 500px;
+}
+
+.timer h1 {
+  font-size: 10em;
+}
+
+.clock {
+  vertical-align: middle;
+  padding-top: 10%;
+  color: white;
 }

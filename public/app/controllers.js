@@ -96,8 +96,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 }])
 
 .controller('TimerCtrl', ['$scope', '$interval', '$filter', function($scope, $interval, $filter) {
-    // $scope.time = $filter('date')(new Date(), 'HH:mm:ss');
-    // $scope.newTime = $scope.time + $filter('date')('00:01:00');
+
     $scope.Timer = 300;
     $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
     $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);

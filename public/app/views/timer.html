@@ -1,9 +1,11 @@
-<div class="container text-center" ng-controller="TimerCtrl">
- <h1>{{minutes}}: {{seconds}}</h1>
- <div class="controls">
+<div class="container text-center timer" ng-controller="TimerCtrl">
+ <div class="clock">
+  <h1>{{minutes}}: {{seconds}}</h1>
+  <div class="controls">
     <button class="btn" ng-click="addTimer()" >add 5 min</button>
     <button class="btn" ng-click="startTimer()" >start</button>
     <button class="btn" ng-click="stopTimer()" >stop</button>
     <button class="btn" ng-click="resetTimer()" >reset</button>
+    </div>
   </div>
 </div>

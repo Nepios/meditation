@@ -10,8 +10,8 @@ var secret = "mysupersecretpassword";
 var mongoose = require('mongoose');
 var User = require('./models/user');
 var skipper = require('skipper');
-var mongodbURI = process.env.MONGO;
-mongoose.connect(mongodbURI);
+// var mongodbURI = process.env.MONGO;
+mongoose.connect('mongodb://localhost/meditations');
 
 app.use(skipper());
 app.use(bodyParser.json());

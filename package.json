@@ -23,7 +23,7 @@
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.7.0",
-    "mongodb": "^2.1.14",
+    "mongodb": "^2.1.15",
     "mongoose": "^4.4.11",
     "s3": "^4.4.0",
     "skipper": "^0.5.9",

@@ -1,10 +1,12 @@
 .zen-stone {
   margin: 0 auto;
+  height: 300px;
 }
 
 .btn-emotion {
   display: inline-block;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .timer {
@@ -21,4 +23,30 @@
   vertical-align: middle;
   padding-top: 10%;
   color: white;
+}
+
+.home {
+  color: #5e5e5e;
+}
+.emotion-meditation{
+  color: #5e5e5e;
+}
+
+.stones {
+  margin: 0 auto;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    background-color: #B4DEDB;
+    border-color: #B4DEDB;
+}
+.btn-primary{
+  background-color: rgb(122,197,233);
+  border-color: rgb(122,197,233);
+  color: white;
+}
+body {
+/*  background-color: #79A4D5;*/
+/*  background-color: #92C6FF;*/
+background-color: rgb(197, 217, 232);
 }

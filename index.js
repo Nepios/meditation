@@ -13,7 +13,6 @@ var skipper = require('skipper');
 var mongodbURI = process.env.MONGO;
 mongoose.connect(mongodbURI);
 // mongoose.connect('mongodb://localhost/meditations');
-var x = 0;
 
 app.use(skipper());
 app.use(bodyParser.json());

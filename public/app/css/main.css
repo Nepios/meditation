@@ -1,10 +1,10 @@
-.home {
-  background-image: url("./images/zen_ocean_by_abdullahusman.jpg");
-  height: 500px;
+.zen-stone {
+  margin: 0 auto;
 }
 
 .btn-emotion {
   display: inline-block;
+  margin-top: 1em;
 }
 
 .timer {

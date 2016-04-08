@@ -28,4 +28,6 @@ Meditation was created using MongoDB, AngularJS, Express.js, Node.js, and the li
 ##Approach and Methods
 [View my pitch deck with wireframes, user stories, and additional screenshots](https://drive.google.com/open?id=0ByqpW8b0agwFdm5jQjlWV3Q5UnM).
 
+In creating this app, I first thought of the basic user stories and wireframed the mockups for the mobile responsive app. Next I researched available guided meditations and discovered some of them were larger than the 16MB limit for data in MongoDB.  I decided to use AWS S3 for cloud hosting and then store the cloud links in the mongo database. I built out the basic routes for the app using angular ui and added basic login and authentication functionality. I then created the database and used s3 and aws s3 to wrap the files and send them for hosting on AWS. Researching meditations and applying the correct emotion tags took some time and then I built out a timer so that users could meditate on their own without listening to a guided meditation. Finally, I worked on improving the overall UI and insuring that the app was functional both on computer and mobile. Lastly, I improved the styling of the app and made sure the overall look was calm and relaxing in keeping with the theme.
+
 

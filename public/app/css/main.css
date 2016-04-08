@@ -17,6 +17,7 @@
   background-color: rgb(122,197,233);
   border-color: rgb(122,197,233);
   color: white;
+  border-radius: 0;
 }
 
 /*timer styling*/
@@ -51,16 +52,28 @@
 }
 /*navbar styling*/
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  background-color: #B4DEDB;
-  border-color: #B4DEDB;
+/*  background-color: #B4DEDB;
+  border-color: #B4DEDB;*/
+  background-color: rgba(180, 222, 219, .8);
   background-image: url('./app/images/sand-crop.jpg');
 }
 .navbar-default .navbar-brand {
     color: #5e5e5e;
     font-weight: bolder;
     font-size: 2em;
+/*    margin-left: 4em;*/
+}
+.pull-left {
+  margin-left: 4em;
 }
 
+.right-style {
+  margin-right: 3em;
+}
+
+.sand-zen {
+  margin: 0 auto;
+}
 body {
 /*  background-color: #79A4D5;*/
 /*  background-color: #92C6FF;*/

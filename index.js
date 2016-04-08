@@ -10,15 +10,15 @@ var secret = "mysupersecretpassword";
 var mongoose = require('mongoose');
 var User = require('./models/user');
 var skipper = require('skipper');
-// var mongodbURI = process.env.MONGO;
-// mongoose.connect(mongodbURI);
-mongoose.connect('mongodb://localhost/meditations');
+var mongodbURI = process.env.MONGO;
+mongoose.connect(mongodbURI);
+// mongoose.connect('mongodb://localhost/meditations');
 
 app.use(skipper());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/api/meditations', expressJWT({secret: secret}));
+app.use('/api/meditations', expressJWT({secret: secret}));
 app.use('/api/users', expressJWT({secret: secret})
 .unless({path: ['/api/users'], method: 'post'}));
 

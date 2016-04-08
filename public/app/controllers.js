@@ -131,4 +131,8 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('AlertsCtrl', ['$scope', 'Alerts', function ($scope, Alerts){
   $scope.alerts = Alerts.get();
+  $scope.showAlerts = true;
+  setTimeout(function() {
+    $scope.alerts = Alerts.clear();
+  }, 4000)
 }])

@@ -96,7 +96,8 @@ font-family: 'Lato', sans-serif;
     margin-left: 0;
   }
   .audio-control {
-    padding-left: 0;
+    padding-left: 0px;
+    width: 90%;
   }
 
   .pull-left {

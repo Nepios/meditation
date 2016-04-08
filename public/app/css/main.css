@@ -104,4 +104,8 @@ font-family: 'Lato', sans-serif;
   .pull-left {
   margin-left: 1em;
 }
+
+.timer h1 {
+  font-size: 5em;
+}
 }

@@ -1,9 +1,9 @@
 <div class="emotion-meditation text-center">
   <h1>meditations</h1>
     <img src="http://spiralenergies.com/wp-content/uploads/+-Zen-rocks-in-green-water-Aug-14-Blog-12432395_s.jpg" class="img-responsive stones">
-  <div className="well" ng-repeat="meditation in meditations track by meditation._id">
+  <div class="well meditation-audio" ng-repeat="meditation in meditations track by meditation._id">
 
-    <h3>{{meditation.title}}<small> {{meditation.author}}</small><a href="" class="glyphicon glyphicon-heart-empty"></a></h3>
+    <h3>{{meditation.title}}<small> {{meditation.author}}</small><a href="" ></a></h3>
     <p>{{meditation.description}}</p>
     <p>{{meditation.duration}}</p>
     <div>

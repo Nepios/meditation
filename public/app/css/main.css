@@ -50,6 +50,15 @@
 .stones {
   margin: 0 auto;
 }
+.meditation-audio {
+  width: 45%;
+  height: 300px;
+  display: inline-block;
+  overflow: auto;
+  margin-top: 1em;
+  margin-left: 1em;
+  background-color: rgba(255,255,255,0.3);
+}
 /*navbar styling*/
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
 /*  background-color: #B4DEDB;
@@ -79,4 +88,11 @@ body {
 /*  background-color: #92C6FF;*/
 background-color: rgb(197, 217, 232);
 font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .meditation-audio {
+    width: 95%;
+    background-color: rgba(255,255,255,0.3);
+  }
 }

@@ -43,6 +43,10 @@
       color:  rgb(15, 74, 125);*/
         color:  rgb(1, 37, 95);
 }
+
+.btn {
+  border-radius: 0;
+}
 /*mood page styling*/
 .emotion-meditation{
   color: #5e5e5e;

@@ -111,8 +111,9 @@ angular.module('MeditationCtrls', ['MeditationServices'])
         if ($scope.Timer > 0 ){
           $scope.Timer--
           $scope.calculateTime($scope.Timer);
-        }
+        } 
         }, 1000)
+
        }
       $scope.stopTimer = function () {
       $interval.cancel($scope.intervalId);

@@ -64,7 +64,6 @@
 /*  background-color: #B4DEDB;
   border-color: #B4DEDB;*/
   background-color: rgba(180, 222, 219, .8);
-  background-image: url('./app/images/sand-crop.jpg');
 }
 .navbar-default .navbar-brand {
     color: #5e5e5e;
@@ -97,6 +96,10 @@ font-family: 'Lato', sans-serif;
     margin-left: 0;
   }
   .audio-control {
-    padding: 0;
+    padding-left: 0;
   }
+
+  .pull-left {
+  margin-left: 1em;
+}
 }

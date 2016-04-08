@@ -25,6 +25,7 @@ Meditation was created using MongoDB, AngularJS, Express.js, Node.js, and the li
 * body-parser
 * bcrypt
 
-
+##Approach and Methods
+[View my pitch deck with wireframes, user stories, and additional screenshots](https://drive.google.com/open?id=0ByqpW8b0agwFdm5jQjlWV3Q5UnM).
 
 

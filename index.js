@@ -4,17 +4,14 @@ var path = require('path');
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var app = express();
-
 var secret = "mysupersecretpassword";
-
 var mongoose = require('mongoose');
 var User = require('./models/user');
-var skipper = require('skipper');
-var mongodbURI = process.env.MONGO;
-mongoose.connect(mongodbURI);
-// mongoose.connect('mongodb://localhost/meditations');
 
-app.use(skipper());
+// var mongodbURI = process.env.MONGO;
+// mongoose.connect(mongodbURI);
+mongoose.connect('mongodb://localhost/meditations');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,7 +33,6 @@ app.post('/api/auth', function(req, res) {
     if (err || !user) return res.status(401).send({message: 'User not found'});
     user.authenticated(req.body.password, function(err, result) {
       if (err || !result) return res.status(401).send({message: 'User not authenticated'});
-
       var token = jwt.sign(user, secret);
       res.send({user: user, token: token});
     });

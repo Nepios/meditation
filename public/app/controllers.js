@@ -2,13 +2,6 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 .controller('HomeCtrl', ['$scope', 'Meditation', function($scope, Meditation) {
   $scope.meditations = [];
 
-   // Meditation.get(function success(data) {
-   //  console.log(data);
-   //  $scope.meditations = data;
-   //  }, function error(data) {
-   //    console.log(data);
-   //  });
-
   $scope.deleteMeditation = function(id, meditationIdx) {
     Meditation.delete({id: id}, function success(data) {
       $scope.meditations.splice(meditationIdx, 1);
@@ -107,15 +100,14 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     }
     $scope.startTimer = function() {
       $scope.counter = true;
-       $scope.intervalId = $interval(function() {
+      $scope.intervalId = $interval(function() {
         if ($scope.Timer > 0 ){
           $scope.Timer--
           $scope.calculateTime($scope.Timer);
         } 
-        }, 1000)
-
-       }
-      $scope.stopTimer = function () {
+      }, 1000)
+    }
+    $scope.stopTimer = function () {
       $interval.cancel($scope.intervalId);
     }
     $scope.resetTimer = function () {

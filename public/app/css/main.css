@@ -5,6 +5,7 @@
   height: 300px;
   padding-bottom: 10%;
 }
+
 .home {
   color: #5e5e5e;
 }
@@ -14,6 +15,7 @@
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
 .btn-primary{
   background-color: rgb(122,197,233);
   border-color: rgb(122,197,233);
@@ -22,6 +24,7 @@
 }
 
 /*timer styling*/
+
 .timer {
   background-image: url('https://pomodorozen.files.wordpress.com/2009/07/zen-garden.jpg');
   background-size: cover;
@@ -37,17 +40,17 @@
   padding-top: 10%;
   color: white;
 }
+
 .clock-numbers {
- /* color:  rgb(220, 238, 252);*/
-/*    color:  rgb(195, 222, 241);
-      color:  rgb(15, 74, 125);*/
-        color:  rgb(1, 37, 95);
+  color:  rgb(1, 37, 95);
 }
 
 .btn {
   border-radius: 0;
 }
+
 /*mood page styling*/
+
 .emotion-meditation{
   color: #5e5e5e;
 }
@@ -55,6 +58,7 @@
 .stones {
   margin: 0 auto;
 }
+
 .meditation-audio {
   width: 45%;
   height: 350px;
@@ -64,18 +68,19 @@
   margin-left: 1em;
   background-color: rgba(255,255,255,0.3);
 }
+
 /*navbar styling*/
+
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-/*  background-color: #B4DEDB;
-  border-color: #B4DEDB;*/
   background-color: rgba(180, 222, 219, .8);
 }
+
 .navbar-default .navbar-brand {
     color: #5e5e5e;
     font-weight: bolder;
     font-size: 2em;
-/*    margin-left: 4em;*/
 }
+
 .pull-left {
   margin-left: 4em;
 }
@@ -88,11 +93,10 @@
   margin: 0 auto;
   width: 60%;
 }
+
 body {
-/*  background-color: #79A4D5;*/
-/*  background-color: #92C6FF;*/
-background-color: rgb(197, 217, 232);
-font-family: 'Lato', sans-serif;
+  background-color: rgb(197, 217, 232);
+  font-family: 'Lato', sans-serif;
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -101,14 +105,15 @@ font-family: 'Lato', sans-serif;
     background-color: rgba(255,255,255,0.3);
     margin-left: 0;
   }
+
   .audio-control {
     padding-left: 0px;
     width: 90%;
   }
 
   .pull-left {
-  margin-left: 1em;
-}
+    margin-left: 1em;
+  }
 
   .timer h1 {
     padding-top: 25%;

@@ -4,7 +4,6 @@ var router = express.Router();
 var s3 = require('s3');
 var s3key = process.env.AWS_ACCESS_KEY_ID;
 var s3secret = process.env.AWS_SECRET_ACCESS_KEY;
-var mongoose = require('mongoose');
 var client = s3.createClient({
   maxAsyncS3: 20,     // this is the default 
   s3RetryCount: 3,    // this is the default 
@@ -61,6 +60,7 @@ router.route('/')
   .post(function(req, res) {
     uploadToS3(req, res);
   })
+
 router.route('/mood/:mood')
   .get(function(req, res) {
     console.log("mood router is running");

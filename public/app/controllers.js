@@ -13,23 +13,22 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 }])
 
 .controller('NewCtrl', ['$scope', '$location', 'Meditation', function($scope, $location, Meditation) {
+  $scope.meditation = {
+    title: '',
+    description: '',
+    link: '',
+    author: '',
+    emotion: 0,
+    duration: 0
+  };
 
-    $scope.meditation = {
-      title: '',
-      description: '',
-      link: '',
-      author: '',
-      emotion: 0,
-      duration: 0
-    };
-
-    $scope.createMeditation = function() {
-      Meditation.save($scope.meditation, function success(data) {
-        $location.path('/');
-      }, function error(data) {
-        console.log(data);
-      });
-    }
+  $scope.createMeditation = function() {
+    Meditation.save($scope.meditation, function success(data) {
+      $location.path('/');
+    }, function error(data) {
+      console.log(data);
+    });
+  }
 }])
 
 .controller('ShowCtrl', ['$scope', '$stateParams', 'MeditationSearch', function($scope, $stateParams, MeditationSearch) {
@@ -48,19 +47,22 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     $state.reload();
   }
 }])
+
 .controller('SignupCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
   $scope.user = {
     email: '',
     password: ''
   };
+
   $scope.userSignup = function() {
     $http.post('/api/users', $scope.user).then(function success(res){
-     $location.path('/');
+     $location.path('/login');
     }, function error(res){
       console.log(res);
     });
   }
 }])
+
 .controller('LoginCtrl', ['$scope', '$http', '$location', 'Auth', 'Alerts', function($scope, $http, $location, Auth, Alerts) {
   $scope.user = {
     email: '',
@@ -79,8 +81,6 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('DisplayCtrl', ['$scope', 'Meditation', function($scope, Meditation) {
   $scope.meditations = [];
- 
-
   Meditation.query(function success(data) {
     $scope.meditations = data;
   }, function error(data) {
@@ -93,11 +93,13 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     $scope.Timer = 40;
     $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
     $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);
+    
     $scope.calculateTime = function () {
       $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
       $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);
       $output = $scope.minutes + ":" + $scope.seconds;
     }
+    
     $scope.startTimer = function() {
       // $scope.counter = true;
       $scope.mySound.load();

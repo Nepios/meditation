@@ -8,9 +8,9 @@ var secret = "mysupersecretpassword";
 var mongoose = require('mongoose');
 var User = require('./models/user');
 
-// var mongodbURI = process.env.MONGO;
-// mongoose.connect(mongodbURI);
-mongoose.connect('mongodb://localhost/meditations');
+var mongodbURI = process.env.MONGO;
+mongoose.connect(mongodbURI);
+// mongoose.connect('mongodb://localhost/meditations');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

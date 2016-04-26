@@ -90,7 +90,7 @@ angular.module('MeditationCtrls', ['MeditationServices'])
 
 .controller('TimerCtrl', ['$scope', '$interval', '$filter', function($scope, $interval, $filter) {
     $scope.mySound = new buzz.sound("/app/tibetan-bowl.mp3");
-    $scope.Timer = 300;
+    $scope.Timer = 5;
     $scope.minutes = ('0' + Math.floor($scope.Timer / 60)).slice(-2);
     $scope.seconds = ('0' + ($scope.Timer % 60)).slice(-2);
     $scope.calculateTime = function () {
@@ -100,6 +100,8 @@ angular.module('MeditationCtrls', ['MeditationServices'])
     }
     $scope.startTimer = function() {
       // $scope.counter = true;
+      $scope.mySound.load();
+      $scope.mySound.play();
       $scope.intervalId = $interval(function() {
         if ($scope.Timer > 0 ){
           $scope.Timer--

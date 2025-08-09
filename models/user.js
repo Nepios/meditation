@@ -20,11 +20,12 @@ UserSchema.set('toJSON', {
 });
 
 UserSchema.methods.authenticated = function(password, callback) {
+  const user = this;
   bcrypt.compare(password, this.password, function(err, res) {
     if (err) {
       callback(err);
     } else {
-      callback(null, res ? this : false);
+      callback(null, res ? user : false);
     }
   });
 }

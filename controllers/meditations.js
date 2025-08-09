@@ -1,53 +1,55 @@
 var express = require('express');
 var Meditation = require('../models/meditation');
 var router = express.Router();
-var s3 = require('s3');
-var s3key = process.env.AWS_ACCESS_KEY_ID;
-var s3secret = process.env.AWS_SECRET_ACCESS_KEY;
-var client = s3.createClient({
-  maxAsyncS3: 20,     // this is the default 
-  s3RetryCount: 3,    // this is the default 
-  s3RetryDelay: 1000, // this is the default 
-  multipartUploadThreshold: 20971520, // this is the default (20 MB) 
-  multipartUploadSize: 15728640, // this is the default (15 MB) 
-  s3Options: {
-    accessKeyId: s3key,
-    secretAccessKey: s3secret,
-  },
+var { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+var fs = require('fs');
+var multer = require('multer');
+
+// Configure multer for file uploads
+var upload = multer({ dest: 'uploads/' });
+
+var s3Client = new S3Client({
+  region: 'us-west-2',
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  }
 });
-var uploadToS3 = function (req, res){
-  // sets up the s3 wrapper to upload to AWS
-  var awspath = "meditationappstorage/meditations/" + req.body.title;
-  var params = {
-    localFile: req.body.audiofile,
-    s3Params: {
+var uploadToS3 = async function (req, res){
+  try {
+    // Upload to S3 using modern AWS SDK
+    var awspath = "meditations/" + req.body.title.replace(/\s+/g, '_');
+    var fileStream = fs.readFileSync(req.file.path);
+    
+    var params = {
       Bucket: "meditationappstorage",
       Key: awspath,
+      Body: fileStream,
+      ContentType: 'audio/mpeg',
       ACL: 'public-read'
-    },
-  };
-  // uploads mp3 file to AWS
-  var uploader = client.uploadFile(params);
-  uploader.on('error', function(err) {
-    console.error("unable to upload:", err.stack);
-  });
-  uploader.on('progress', function() {
-    console.log("progress", uploader.progressMd5Amount,
-              uploader.progressAmount, uploader.progressTotal);
-  });
-  uploader.on('end', function() {
+    };
+    
+    var command = new PutObjectCommand(params);
+    await s3Client.send(command);
+    
     console.log("done uploading");
-    // format and store aws link
-    var title = req.body.title;
-    var titleUpdate = title.split(' ').join('+');
-    var awsLink = s3.getPublicUrl('meditationappstorage/meditationappstorage/meditations', titleUpdate, 'us-west-2');
+    
+    // Create AWS link
+    var awsLink = `https://s3-us-west-2.amazonaws.com/meditationappstorage/${awspath}`;
     req.body.link = awsLink;
-    // create mongo entry for meditation
+    
+    // Clean up uploaded file
+    fs.unlinkSync(req.file.path);
+    
+    // Create mongo entry for meditation
     Meditation.create(req.body, function(err, meditation) {
       if (err) return res.status(500).send(err);
       res.send(meditation);
     });
-  })
+  } catch (err) {
+    console.error("unable to upload:", err);
+    res.status(500).send({error: 'Upload failed'});
+  }
 }
 
 router.route('/')
@@ -57,7 +59,7 @@ router.route('/')
       res.send(meditations);
     });
   })
-  .post(function(req, res) {
+  .post(upload.single('audiofile'), function(req, res) {
     uploadToS3(req, res);
   })
 
@@ -78,14 +80,14 @@ router.route('/:id')
     })
    })
   .put(function(req, res) {
-    Meditation.findByIdAndUpdate(req.params.id, req.body, function(err) {
+    Meditation.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, meditation) {
       if (err) return res.status(500).send(err);
       res.send({'message': 'success'});
     });
   })
   .delete(function(req, res) {
     console.log(req.params.id);
-    Meditation.findByIdAndRemove(req.params.id, {}, function(err) {
+    Meditation.findByIdAndDelete(req.params.id, function(err) {
       if (err) return res.status(500).send(err);
       res.send({'message': 'success'});
     });

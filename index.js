@@ -8,15 +8,14 @@ var secret = "mysupersecretpassword";
 var mongoose = require('mongoose');
 var User = require('./models/user');
 
-var mongodbURI = process.env.MONGO;
+var mongodbURI = process.env.MONGO || 'mongodb://localhost/meditations';
 mongoose.connect(mongodbURI);
-// mongoose.connect('mongodb://localhost/meditations');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/api/meditations', expressJWT({secret: secret}));
-app.use('/api/users', expressJWT({secret: secret})
+// app.use('/api/meditations', expressJWT({secret: secret, algorithms: ['HS256']}));
+app.use('/api/users', expressJWT({secret: secret, algorithms: ['HS256']})
 .unless({path: ['/api/users'], method: 'post'}));
 
 app.use(function (err, req, res, next) {
